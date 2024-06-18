@@ -1,3 +1,5 @@
+package components;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -11,7 +13,7 @@ public class Bank {
     private HashSet<Integer> giftCards = new HashSet<>();
 
 
-    Bank() {
+    public Bank() {
         userId.add(1);
         accountNo.add(11011);
     }
@@ -24,21 +26,21 @@ public class Bank {
         return accountNo;
     }
 
-    void setUser(User user) {
+    public void setUser(User user) {
         this.users.add(user);
     }
 
 
-    void addNewUser(int id, int accNo) {
+    public void addNewUser(int id, int accNo) {
         userId.add(id);
         accountNo.add(accNo);
     }
 
-    int[] getLastUserInfo() {
+    public int[] getLastUserInfo() {
         return new int[]{new ArrayList<>(userId).getLast(), new ArrayList<>(accountNo).getLast()};
     }
 
-    User findUserById(int id) {
+    public User findUserById(int id) {
         for (User user : users) {
             if (user.getId() == id) {
                 return user;

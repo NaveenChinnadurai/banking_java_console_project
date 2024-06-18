@@ -1,3 +1,5 @@
+package components;
+
 import java.util.Objects;
 
 public class Giftcard {
@@ -7,7 +9,7 @@ public class Giftcard {
     private final String PASSWORD;
     private int balance;
 
-    Giftcard(int giftCardId, String password, User user) {
+    public Giftcard(int giftCardId, String password, User user) {
         this.ownership = user;
         this.giftCardId = giftCardId;
         this.PASSWORD = password;
@@ -17,7 +19,7 @@ public class Giftcard {
         return new String[]{String.valueOf(getGiftCardId()), String.valueOf(balance), String.valueOf(ownership.getAccountDetails()[0])};
     }
 
-    int getGiftCardId() {
+    public int getGiftCardId() {
         return giftCardId;
     }
 
@@ -29,7 +31,7 @@ public class Giftcard {
         return balance;
     }
 
-    String redeemTo(String password, User toUser) {
+    public String redeemTo(String password, User toUser) {
         if (Objects.equals(this.PASSWORD, password)) {
             toUser.setBalance(toUser.getBalance() + this.getBalance());
             setBalance(0);
@@ -39,7 +41,7 @@ public class Giftcard {
         }
     }
 
-    String setAmount(int amount) {
+    public String setAmount(int amount) {
         if (ownership.getBalance() >= amount) {
             balance = amount;
             ownership.setBalance(ownership.getBalance() - amount);

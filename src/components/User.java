@@ -1,5 +1,9 @@
+package components;
+
 import java.util.HashSet;
-import utils.encrypt;
+
+import static utils.encrypt.encryptPassword;
+
 public class User {
 
     private final int id, accountNo;
@@ -8,32 +12,32 @@ public class User {
     private final String userName;
     private final HashSet<Giftcard> giftCards = new HashSet<>();
 
-    User(String name, String password, Bank bk) {
+    public User(String name, String password, Bank bk) {
         this.userName = name;
         this.id = bk.getLastUserInfo()[0] + 1;
         this.accountNo = bk.getLastUserInfo()[1] + 11;
         bk.addNewUser(this.id, this.accountNo);
-        this.encryptedPassword = encrypt.encryptPassword(password);
+        this.encryptedPassword = encryptPassword(password);
         this.balance = 7000;
     }
 
-    void createGiftcard(int amount, User user) {
+    public void createGiftcard(int amount, User user) {
         Giftcard newGiftCard = new Giftcard(1, "gift@143", user);
     }
 
-    void redeemGiftCard(Giftcard giftCard, String password, User user) {
+    public void redeemGiftCard(Giftcard giftCard, String password, User user) {
         giftCard.redeemTo(password, user);
     }
 
-    int[] getAccountDetails() {
+    public int[] getAccountDetails() {
         return new int[]{id, accountNo, balance};
     }
 
-    int getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    String withdraw(int amount) {
+    public String withdraw(int amount) {
         if (this.balance >= amount) {
             this.balance -= amount;
             return "Amount Withdrawn!!";
@@ -46,21 +50,15 @@ public class User {
         return encryptedPassword;
     }
 
-    void setBalance(int balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
-    }
-
-    HashSet<Giftcard> getGiftcard() {
-        return giftCards;
     }
 
     public HashSet<Giftcard> getGiftCards() {
         return giftCards;
     }
 
-
-
-    int getId() {
+    public int getId() {
         return id;
     }
 }
